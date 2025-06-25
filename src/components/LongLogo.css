@@ -1,0 +1,9 @@
+.long-logo {
+  display: flex;
+  align-items: center;
+}
+
+.long-logo__image {
+  width: 100px;
+  height: 100px;
+}

@@ -1,0 +1,23 @@
+.pet-card {
+  display: flex;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: white;
+}
+.pet-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+.pet-card-info {
+  padding: 10px;
+}
+.pet-card-info h4 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.pet-card-info p {
+  margin: 4px 0 0;
+  color: #666;
+}

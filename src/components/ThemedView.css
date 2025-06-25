@@ -1,0 +1,22 @@
+.themed-view--container {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: auto;
+  box-sizing: border-box;
+}
+
+.themed-view--card {
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.themed-view--section {
+  padding: 24px;
+  background-color: #f7f7f7;
+  margin-bottom: 16px;
+}
+

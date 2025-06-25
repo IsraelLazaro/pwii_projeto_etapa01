@@ -1,0 +1,36 @@
+.safe-area {
+  padding: 24px;
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  flex-direction: column;
+}
+
+.welcome-image {
+  max-width: 100%;
+  margin-top: 32px;
+}
+
+.pagination-dots {
+  display: flex;
+  gap: 8px;
+  margin: 16px 0 64px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.buttons {
+  width: 100%;
+  max-width: 400px; /* ✅ limita a largura dos botões juntos */
+  margin: 0 auto;   /* ✅ centraliza horizontalmente */
+  display: flex;
+  justify-content: space-between; /* ✅ separa os botões */
+  gap: 16px; /* espaço entre os botões */
+}

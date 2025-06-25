@@ -1,0 +1,24 @@
+.themed-text {
+  color: #222;
+}
+
+.themed-text--title {
+  font-size: 3rem;
+  font-weight: bold;
+ 
+}
+
+.themed-text--subtitle {
+  font-size: 2rem;
+  font-weight: 600;
+  font-weight: bold;
+}
+
+.themed-text--body {
+  font-size: 1rem;
+}
+
+.themed-text--small {
+  font-size: 0.8rem;
+  color: #555;
+}

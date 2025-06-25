@@ -1,0 +1,7 @@
+.info-section {
+  display: flex;
+  justify-content: space-around;
+  margin: 24px auto;
+  max-width: 500px;
+  gap: 12px;
+}

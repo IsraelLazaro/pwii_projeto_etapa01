@@ -1,0 +1,13 @@
+.vaccination-card {
+  padding: 12px;
+  border-radius: 10px;
+  background-color: #e6f9f0;
+  border: 1px solid #b5eecd;
+}
+.vaccination-card h4 {
+  margin: 0;
+}
+.vaccination-card p {
+  margin: 4px 0 0;
+  color: #333;
+}
