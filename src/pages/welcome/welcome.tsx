@@ -36,6 +36,13 @@ export default function Welcome() {
             <ThemedText lightColor="white">Conhecer</ThemedText>
           </ThemedButton>
         </div>
+        <ThemedButton 
+        type="transparent" 
+        onClick={() => navigate('/faq')}
+        style={{ marginTop: 20 }}
+        >
+        <ThemedText style={{ color: primaryColor }}>PW II - ATIVIDADE</ThemedText>
+      </ThemedButton>
       </ThemedView>
     </div>
   );
