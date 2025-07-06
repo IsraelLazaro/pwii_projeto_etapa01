@@ -16,7 +16,7 @@ export const Colors = {
     danger: '#FF4D4F'   
   },
   dark: {
-    title:'#111A41',
+    title: '#ffffff', 
     text: '#111A41',
     background: '#151718',
     primary: '#775CE5',

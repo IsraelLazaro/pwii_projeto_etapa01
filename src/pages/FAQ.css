@@ -1,4 +1,18 @@
 
+:root {
+  --bg-card: #f8fafc;
+  --bg-item: #ffffff;
+  --text-primary: #1e1e1e;
+  --text-secondary: #64748b;
+}
+
+body.dark {
+  --bg-card: #222426;
+  --bg-item: #2d2f31;
+  --text-primary: #ffffff;
+  --text-secondary: #cbd5e1;
+}
+
 .faq-container {
   display: flex;
   flex-direction: column;
@@ -10,7 +24,7 @@
 .faq-section {
   border-radius: 8px;
   overflow: hidden;
-  background-color: #f8fafc;
+  background-color: var(--bg-card);
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   max-width: 100%;
@@ -19,6 +33,10 @@
 .faq-section:hover {
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+.faq-section button:hover{
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
 }
 
 .section-content {
@@ -31,6 +49,8 @@
 .section-content.open {
   max-height: 2000px;
   padding: 20px;
+  background-color: var(--bg-item);
+  color: var(--text-primary);
 }
 
 .requirements-list {
@@ -40,7 +60,7 @@
 }
 
 .req-item {
-  background-color: white;
+  background-color: var(--bg-item);
   padding: 15px;
   border-radius: 4px;
   border-left: 4px solid var(--primary-color);
@@ -66,7 +86,7 @@
 .req-priority {
   margin-top: 8px;
   font-size: 0.9em;
-  color: #64748b;
+  color: var(--text-secondary);
 }
 
 .team-grid {
@@ -77,7 +97,7 @@
 }
 
 .team-card {
-  background: white;
+  background: var(--bg-item);
   padding: 20px;
   border-radius: 8px;
   text-align: center;

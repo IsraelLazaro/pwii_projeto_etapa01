@@ -6,14 +6,15 @@ import { useThemeColor } from '../hooks/useThemeColor';
 import { LongLogo } from '../components/LongLogo';
 import { FaPaw, FaClipboardCheck, FaChevronDown, FaUsers, FaUser, FaGithub } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import { useBodyThemeClass } from '../hooks/useBodyThemeClass';
 import './FAQ.css';
 
 export default function FAQPage() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const primaryColor = useThemeColor({}, 'primary');
-  const secondaryColor = useThemeColor({}, 'placeholder');
+  const placeholderColor = useThemeColor({}, 'placeholder');
+  const iconColor = useThemeColor({}, 'textPrimary');
   const navigate = useNavigate();
-
+  useBodyThemeClass();
   const toggleSection = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
@@ -71,52 +72,51 @@ comunicação entre os donos de pets que desejem encontrar parceiros para seus p
         </div>
       )
     },
-{
-  title: "Integrantes da Equipe",
-  icon: <FaUsers size={20} />,
-  content: (
-    <div className="team-grid">
-      {[
-        { name: "EDWILSON BEZERRA SOBRINHO NETO", github: "", avatar: <FaUser size={48} /> },
-        { name: "HENRIQUE ELIAS PARNAIBA", github: "", avatar: <FaUser size={48} /> },
-        { name: "ISRAEL LÁZARO MANGUEIRA TAVARES", github: "IsraelLazaro", avatar: <FaUser size={48} /> },
-        { name: "PAULO SANTIAGO RODRIGUES SILVA", github: "", avatar: <FaUser size={48} /> }
-      ]
-        .sort((a, b) => a.name.localeCompare(b.name))
-        .map(member => (
-          <div key={member.name} className="team-card">
-            <div className="avatar-container">
-              {member.avatar}
-            </div>
-            <div className="member-info">
-              <ThemedText type="body" style={{ fontWeight: 'bold', textAlign: 'center' }}>
-                {member.name}
-              </ThemedText>
-              {member.github && (
-                <a
-                  href={`https://github.com/${member.github}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="github-link"
-                >
-                  <FaGithub /> @{member.github}
-                </a>
-              )}
-            </div>
-          </div>
-        ))}
-    </div>
-  )
-}
-
+    {
+      title: "Integrantes da Equipe",
+      icon: <FaUsers size={20} />,
+      content: (
+        <div className="team-grid">
+          {[
+            { name: "EDWILSON BEZERRA SOBRINHO NETO", github: "", avatar: <FaUser size={48} /> },
+            { name: "HENRIQUE ELIAS PARNAIBA", github: "", avatar: <FaUser size={48} /> },
+            { name: "ISRAEL LÁZARO MANGUEIRA TAVARES", github: "IsraelLazaro", avatar: <FaUser size={48} /> },
+            { name: "PAULO SANTIAGO RODRIGUES SILVA", github: "", avatar: <FaUser size={48} /> }
+          ]
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map(member => (
+              <div key={member.name} className="team-card">
+                <div className="avatar-container">
+                  {member.avatar}
+                </div>
+                <div className="member-info">
+                  <ThemedText type="body" style={{ fontWeight: 'bold', textAlign: 'center' }}>
+                    {member.name}
+                  </ThemedText>
+                  {member.github && (
+                    <a
+                      href={`https://github.com/${member.github}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="github-link"
+                    >
+                      <FaGithub /> @{member.github}
+                    </a>
+                  )}
+                </div>
+              </div>
+            ))}
+        </div>
+      )
+    }
   ];
 
   return (
     <div className="faq-container">
       <ThemedView variant="container" style={styles.container}>
         <header style={styles.header}>
-          <LongLogo style={styles.logo} onClick={() => navigate('/Welcome')}/>
-          <ThemedText type="title" style={{ color: primaryColor, marginTop: 20 }}>
+          <LongLogo style={styles.logo} onClick={() => navigate('/Welcome')} />
+          <ThemedText type="title" style={{ marginTop: 20 }}>
             Programação para Web II
           </ThemedText>
         </header>
@@ -124,7 +124,7 @@ comunicação entre os donos de pets que desejem encontrar parceiros para seus p
         <main style={styles.main}>
           {sections.map((section, index) => (
             <section key={index} className="faq-section">
-              <ThemedButton onClick={() => toggleSection(index)} style={styles.sectionHeader} type="transparent">
+              <ThemedButton  onClick={() => toggleSection(index)} style={styles.sectionHeader} type="transparent">
                 <div style={styles.sectionTitle}>
                   {section.icon}
                   <ThemedText type="subtitle" style={styles.sectionTitleText}>
@@ -134,7 +134,7 @@ comunicação entre os donos de pets que desejem encontrar parceiros para seus p
                 <FaChevronDown
                   size={18}
                   style={{
-                    color: primaryColor,
+                    color: iconColor,
                     transform: activeIndex === index ? 'rotate(180deg)' : 'none',
                     transition: 'transform 0.3s ease'
                   }}
@@ -148,29 +148,30 @@ comunicação entre os donos de pets que desejem encontrar parceiros para seus p
           ))}
         </main>
       </ThemedView>
-              <footer style={styles.footer}>
-          <ThemedText type="small">
-            DoggyConnect ® {new Date().getFullYear()} |
-            <a href="mailto:suporte@doggyconnect.com" style={{ color: secondaryColor }}>
-              suporte@doggyconnect.com
-            </a>
-          </ThemedText>
-        </footer>
+
+      <footer style={styles.footer}>
+        <ThemedText type="small">
+          DoggyConnect ® {new Date().getFullYear()} |{' '}
+          <a href="mailto:suporte@doggyconnect.com" style={{ color: placeholderColor }}>
+            suporte@doggyconnect.com
+          </a>
+        </ThemedText>
+      </footer>
     </div>
   );
 }
 
 const styles: Record<string, React.CSSProperties> = {
-container: {
+  container: {
     width: '100%',
-  display: 'flex',
-  flexDirection: 'row',  
-  alignItems: 'center', 
-  justifyContent: 'space-between',  
-  gap: '100px',            
-  minHeight: 'auto',
-  padding: '20px',
-},
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: '100px',
+    minHeight: 'auto',
+    padding: '20px',
+  },
   header: {
     marginBottom: '40px',
     textAlign: 'center'
@@ -192,7 +193,7 @@ container: {
     width: '100%',
     padding: '16px',
     borderBottom: '1px solid #eee',
-    cursor: 'pointer'
+    cursor: 'pointer',
   },
   sectionTitle: {
     display: 'flex',
@@ -203,7 +204,7 @@ container: {
     margin: 0
   },
   footer: {
-    width:'100%',
+    width: '100%',
     textAlign: 'center',
     padding: '20px',
     borderTop: '1px solid #eee',
