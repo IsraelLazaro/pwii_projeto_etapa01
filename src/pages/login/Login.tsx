@@ -4,24 +4,22 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useThemeColor } from '../../hooks/useThemeColor';
 import { useNavigate } from 'react-router-dom';
-
-// quando for usar autenticação
-// import { useAuth } from '@/hooks/useAuth';
 import { mockLogin } from '../../services/auth'; 
-
 import { LongLogo } from '../../components/LongLogo';
 import { ThemedView } from '../../components/ThemedView';
 import { ThemedText } from '../../components/ThemedText';
 import { ThemedTextInput } from '../../components/ThemedTextInput';
 import { ThemedButton } from '../../components/ThemedButton';
 import { AlertModal, type AlertModalHandle } from '../../components/AlertModal';
-
 import './Login.css';
+
+// quando for usar autenticação
+// import { useAuth } from '@/hooks/useAuth';
 
 // ✅ Validação com Yup
 const schema = yup.object({
-  email: yup.string().email('E-mail inválido').required('O e-mail é obrigatório'),
-  password: yup.string().min(6, 'A senha deve ter pelo menos 6 caracteres').required('A senha é obrigatória'),
+  email: yup.string().required('O e-mail é obrigatório').email('E-mail inválido'),
+  password: yup.string().required('A senha é obrigatória').min(6, 'A senha deve ter pelo menos 6 caracteres'),
 }).required();
 
 export default function Login() {
@@ -51,7 +49,7 @@ export default function Login() {
     const response = await mockLogin(data.email, data.password);
 
     if (response.success) {
-      navigate('/home');
+      navigate('/Profile');
     } else {
       setModalText(response.message);
       modalRef.current?.setVisible();
@@ -61,17 +59,21 @@ export default function Login() {
   return (
     <div className="safe-area">
       <ThemedView variant="container" style={styles.container}>
-        <LongLogo />
-
+      <LongLogo
+        style={{ cursor: 'pointer' }}
+        onClick={() => navigate('/Welcome')}
+      />
         <ThemedText type="title" style={styles.title}>Fazer Login</ThemedText>
-        <ThemedText type='body' lightColor={secondTextColor}>
+        <ThemedText type='body' darkColor={secondTextColor}>
           Entre para se conectar com a comunidade de pets.
         </ThemedText>
 
         <div style={styles.inputs}>
+          <img src="/assets/images/fundo-pata.webp" alt="pata" className='imgFundo'/>
           <ThemedTextInput
             label="E-mail:"
             placeholder="Digite seu endereço de e-mail"
+            placeholderTextColor={secondTextColor} 
             onChangeText={(text) => setValue('email', text)}
             errorMessage={errors.email?.message}
             style={{ marginBottom: 16 }}
@@ -79,6 +81,7 @@ export default function Login() {
           <ThemedTextInput
             label="Senha:"
             placeholder="Digite sua senha"
+            placeholderTextColor={secondTextColor} 
             secureTextEntry
             onChangeText={(text) => setValue('password', text)}
             errorMessage={errors.password?.message}
@@ -93,7 +96,7 @@ export default function Login() {
           <ThemedText>Ainda não tem conta?</ThemedText>
           <ThemedText
             style={{ color: primaryColor, marginLeft: 8, cursor: 'pointer' }}
-            onClick={() => navigate('/signup')}
+            onClick={() => navigate('/Register')}
           >
             Cadastre-se agora!
           </ThemedText>
@@ -107,17 +110,18 @@ export default function Login() {
 
 const styles: { [key: string]: React.CSSProperties } = {
   container: {
-    padding: 24,
-    paddingTop: 48,
+    height:100,
+    padding: 20,
+    paddingTop: 'auto',
     paddingBottom: 48,
     display: 'flex',
     flexDirection: 'column',
     gap: 16,
     width: '100%',
-    maxWidth: 480,
+    maxWidth: 'auto',
   },
   title: {
-    marginTop: 48,
+    marginTop: 'auto',
     marginBottom: 16,
   },
   inputs: {

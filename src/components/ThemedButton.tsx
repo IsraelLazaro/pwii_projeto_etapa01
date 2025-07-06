@@ -2,7 +2,7 @@ import React from 'react';
 import './ThemedButton.css';
 
 type ThemedButtonProps = {
-  type?: 'success' | 'danger' | 'transparent';
+  type?: 'success' | 'danger' | 'transparent'| 'edit';
   shape?: 'circle';
   style?: React.CSSProperties;
   children?: React.ReactNode;

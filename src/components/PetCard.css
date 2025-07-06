@@ -1,6 +1,7 @@
 .pet-card {
+  position: relative;
   display: flex;
-  border: 1px solid #ddd;
+  
   border-radius: 12px;
   overflow: hidden;
   background-color: white;
@@ -9,6 +10,8 @@
   width: 100px;
   height: 100px;
   object-fit: cover;
+  border: 1px solid #ddd;
+  border-radius: 100%;
 }
 .pet-card-info {
   padding: 10px;
@@ -20,4 +23,20 @@
 .pet-card-info p {
   margin: 4px 0 0;
   color: #666;
+}
+.pet-edit-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 8px;
+  background: rgba(101, 46, 250, 0.9);
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.pet-edit-button:hover {
+  border: 2px solid #ddd;
+  background: #3b1e90;
 }

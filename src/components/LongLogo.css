@@ -1,9 +1,35 @@
 .long-logo {
   display: flex;
   align-items: center;
+  transition: transform 0.2s ease;
 }
 
-.long-logo__image {
+.long-logo:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.long-logo--logo .long-logo__image--logo {
   width: 100px;
   height: 100px;
+}
+
+.long-logo--profile .long-logo__image--profile {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.long-logo--profile {
+  align-items: end;
+  flex-direction: column;
+  text-align: center;
+}
+
+.long-logo--profile .themed-text {
+  margin-left: 0;
+  margin-top: 8px;
+  font-size: 0.9rem;
 }

@@ -8,6 +8,8 @@
 }
 
 .themed-view--card {
+  display: flex;
+  flex-direction: column;
   background-color: #fff;
   padding: 16px;
   border-radius: 12px;
@@ -15,7 +17,7 @@
 }
 
 .themed-view--section {
-  padding: 24px;
+  padding: 20px;
   background-color: #f7f7f7;
   margin-bottom: 16px;
 }

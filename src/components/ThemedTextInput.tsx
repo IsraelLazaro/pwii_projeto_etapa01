@@ -5,6 +5,7 @@ import { ThemedText } from './ThemedText';
 type ThemedTextInputProps = {
   label?: string;
   placeholder?: string;
+  placeholderTextColor?: string;
   value?: string;
   errorMessage?: string;
   secureTextEntry?: boolean;
@@ -23,7 +24,7 @@ export const ThemedTextInput: React.FC<ThemedTextInputProps> = ({
 }) => {
   return (
     <div className="themed-input-wrapper" style={style}>
-      {label && <ThemedText type="subtitle" style={{ marginBottom: 4 }}>{label}</ThemedText>}
+      {label && <ThemedText type="body" style={{ marginBottom: 4 }}>{label}</ThemedText>}
       <input
         className="themed-text-input"
         type={secureTextEntry ? 'password' : 'text'}

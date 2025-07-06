@@ -8,7 +8,7 @@ type ThemedTextProps = {
   style?: React.CSSProperties;
   lightColor?: string;
   darkColor?: string;
-  onClick?: () => void; // ✅ adiciona suporte para clique
+  onClick?: () => void; 
 };
 export const ThemedText: React.FC<ThemedTextProps> = ({
   type = 'body',
@@ -16,7 +16,7 @@ export const ThemedText: React.FC<ThemedTextProps> = ({
   style,
   lightColor,
   darkColor,
-  onClick, // ✅ agora sim
+  onClick, 
 }) => {
   const color = useThemeColor({ light: lightColor, dark: darkColor }, 'textPrimary');
   const className = `themed-text themed-text--${type}`;

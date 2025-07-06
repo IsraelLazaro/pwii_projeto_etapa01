@@ -21,7 +21,7 @@ export default function Welcome() {
         </ThemedText>
         <ThemedText lightColor={headlineColor}>
           Crie o perfil do seu pet, compartilhe e conecte-se com uma comunidade de amantes de cães.
-        </ThemedText>
+        </ThemedText>                
         <img
           src="/assets/images/ilustrative1.png"
           alt="Ilustração"
@@ -32,7 +32,7 @@ export default function Welcome() {
           <div style={{ ...styles.paginationDot, backgroundColor: secondaryColor }} />
         </div>
         <div style={styles.buttons}>
-          <ThemedButton style={{ width: '30%' }} onClick={() => navigate('/Home')}>
+          <ThemedButton style={{ width: '30%' }} onClick={() => navigate('/Welcom_2')}>
             <ThemedText lightColor="white">Conhecer</ThemedText>
           </ThemedButton>
         </div>
@@ -43,15 +43,16 @@ export default function Welcome() {
 
 const styles: { [key: string]: React.CSSProperties } = {
   safeArea: {
-    minHeight: '100vh',
-    padding: 24,
+    maxHeight: '100vh',
+    padding: 'auto',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },
   container: {
-    paddingBottom: 48,
-    paddingTop: 48,
+    height:100,
+    paddingBottom: 20,
+    paddingTop: 20,
     alignItems: 'center',
     justifyContent: 'center',
     display: 'flex',
@@ -59,8 +60,8 @@ const styles: { [key: string]: React.CSSProperties } = {
     width: '100%',
   },
   title: {
-    marginTop: 64,
-    marginBottom: 16,
+    marginTop: 'auto',
+    marginBottom: 'auto',
   },
   paginationDots: {
     display: 'flex',
@@ -68,7 +69,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     width: 30,
     justifyContent: 'center',
     marginTop: 16,
-    marginBottom: 64,
+    marginBottom: 20,
   },
   paginationDot: {
     borderRadius: 20,

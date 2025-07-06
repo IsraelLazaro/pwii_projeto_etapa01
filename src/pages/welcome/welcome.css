@@ -28,9 +28,9 @@
 
 .buttons {
   width: 100%;
-  max-width: 400px; /* ✅ limita a largura dos botões juntos */
-  margin: 0 auto;   /* ✅ centraliza horizontalmente */
+  max-width: 400px; 
+  margin: 0 auto;  
   display: flex;
-  justify-content: space-between; /* ✅ separa os botões */
-  gap: 16px; /* espaço entre os botões */
+  justify-content: space-between; 
+  gap: 16px; 
 }

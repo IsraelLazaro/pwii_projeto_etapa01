@@ -13,5 +13,5 @@
   display: flex;
   width: 50vw;
   text-align: justify;
-  padding: 2%;
+  padding: 'auto';
 }
