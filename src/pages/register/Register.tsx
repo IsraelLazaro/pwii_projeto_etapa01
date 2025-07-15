@@ -14,12 +14,12 @@ import { ThemedText } from '../../components/ThemedText'
 import { ThemedView } from '../../components/ThemedView';
 
 const schema = yup.object({
-    name: yup.string().required('O Nome é obrigatório').min(3, 'O Nome deve ter pelo menos 3 caracteres'),
+    name: yup.string().required('O nome é obrigatório').min(3, 'O nome deve ter pelo menos 3 caracteres'),
     email: yup.string().required('O e-mail é obrigatório').email('E-mail inválido'),
-    password: yup.string().required('A senha é obrigatório').min(6, 'A senha deve ter pelo menos 6 caracteres'),
+    password: yup.string().required('A senha é obrigatória').min(6, 'A senha deve ter pelo menos 6 caracteres'),
     confirmPassword: yup.string()
         .oneOf([yup.ref('password')], 'Passwords must match')
-        .required('Confirmação da senha é obrigatório'),  
+        .required('A confirmação da senha é obrigatória'),  
 }).required();
 
 export default function Register() {
@@ -69,7 +69,7 @@ export default function Register() {
             <div style={styles.inputs}>
                 <ThemedTextInput 
                     label="Nome:"
-                    placeholder="Digite nome!"
+                    placeholder="Digite seu nome"
                     placeholderTextColor={secondTextColor} 
                     onChangeText={(text) => setValue('name', text)}
                     errorMessage={errors.name?.message}
@@ -77,7 +77,7 @@ export default function Register() {
                 />
                 <ThemedTextInput
                     label="E-mail:"
-                    placeholder="Digite seu endereço de e-mail"
+                    placeholder="Digite seu e-mail"
                     placeholderTextColor={secondTextColor} 
                     onChangeText={(text) => setValue('email', text)}
                     errorMessage={errors.email?.message}
@@ -93,7 +93,7 @@ export default function Register() {
                 />
                 <ThemedTextInput
                   label="Confirmar Senha:"
-                  placeholder="Digite sua senha novamente"
+                  placeholder="Digite a senha novamente"
                   placeholderTextColor={secondTextColor} 
                   secureTextEntry
                   onChangeText={(text) => setValue('confirmPassword', text)}
