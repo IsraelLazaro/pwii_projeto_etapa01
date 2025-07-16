@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
-import { ThemedButton } from '../components/ThemedButton';
+import { ThemedButton } from '../src/components/ThemedButton';
 
 describe('ThemedButton', () => {
   it('deve renderizar o texto passado como children', () => {

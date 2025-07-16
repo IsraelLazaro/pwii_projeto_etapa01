@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
-import { PetCard } from '../components/PetCard';
+import { PetCard } from '../src/components/PetCard';
 
 describe('PetCard', () => {
   it('deve mostrar nome, raça e imagem', () => {
