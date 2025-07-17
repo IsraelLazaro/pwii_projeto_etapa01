@@ -23,5 +23,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "tests/PetCard.test.tsx", "tests/ThemedButton.test.tsx"]
+  "include": ["src", "unit/PetCard.test.tsx", "unit/ThemedButton.test.tsx"]
 }
