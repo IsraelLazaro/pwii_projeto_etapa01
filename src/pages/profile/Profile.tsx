@@ -9,13 +9,17 @@ import { LongLogo } from '../../components/LongLogo';
 import './Profile.css';
 import { useThemeColor } from '../../hooks/useThemeColor';
 import { PetCard } from '../../components/PetCard';
+import { api } from "../../../api";
+import { useAuth } from '../../hooks/useAuth';
 
 export default function Profile() {
     const primaryColor = useThemeColor({}, 'primary');
     const navigate = useNavigate();
+    
     const secondTextColor = useThemeColor({}, 'placeholder');
     const [user, setUser] = useState<any>(null);
     const [pets, setPets] = useState<Pet[]>([]);
+    
 
     useEffect(() => {
         async function fetchUserAndPets() {
@@ -70,7 +74,16 @@ export default function Profile() {
 
                 <div style={styles.button}>
                     <ThemedButton type="success">Novo Pet</ThemedButton>
-                    <ThemedButton type="danger" onClick={() => navigate('/Login')}>Sair</ThemedButton>
+                      <ThemedButton 
+                        type="danger" 
+                        onClick={() => {
+                        localStorage.removeItem("token");
+                        localStorage.removeItem("user");
+                        navigate('/Login');
+                        }}
+                    >
+                        Sair
+                    </ThemedButton>
                 </div>
             </ThemedView>
         </div>

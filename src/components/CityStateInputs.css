@@ -1,0 +1,40 @@
+.city-state-container {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  margin-bottom: 16px;
+  
+}
+
+.input-column {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.state-column {
+  flex: 1;
+  min-width: 100px;
+}
+
+.city-column {
+  flex: 2;
+  min-width: 150px;
+}
+
+.city-state-container select option {
+  color: black; 
+  background-color: white; 
+}
+
+@media (max-width: 768px) {
+  .city-state-container {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .state-column,
+  .city-column {
+    width: 100%;
+  }
+}
