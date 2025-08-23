@@ -1,16 +1,23 @@
 import React from 'react';
+import { Pencil } from 'lucide-react';
 import './UserHeader.css';
+//import { ThemedText } from './ThemedText';
 
 type UserHeaderProps = {
-  username: string;
-  avatarUrl: string;
+  userName: string;
+  avatarUrl?: string;
 };
 
-export const UserHeader: React.FC<UserHeaderProps> = ({ username, avatarUrl }) => {
+export const UserHeader: React.FC<UserHeaderProps> = ({ userName, avatarUrl }) => {
   return (
     <div className="user-header">
-      <img src={avatarUrl} alt={username} />
-      <span>{username}</span>
+      <div className="avatar-wrapper">
+        <img src={avatarUrl} alt={userName} />
+        <span className="edit-icon">
+          <Pencil size={25} color="#652efa"/>
+        </span>
+      </div>      
+        <span className="user-name">{userName}</span>
     </div>
   );
 };

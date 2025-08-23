@@ -5,7 +5,8 @@ interface User {
   userName: string;
   email: string;
   avatarUrl?: string;
-  bio?: string;
+  pets: string[];
+
 }
 
 interface AuthContextType {
@@ -29,7 +30,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     const storedToken = localStorage.getItem("token");
-
+    console.log("Recuperando do localStorage:", { storedUser, storedToken }); 
     if (storedUser && storedToken) {
       setUser(JSON.parse(storedUser));
       setToken(storedToken);
@@ -37,6 +38,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   const login = (userData: User, token: string) => {
+    console.log("Salvando no contexto:", { userData, token });
     setUser(userData);
     setToken(token);
     localStorage.setItem("user", JSON.stringify(userData));

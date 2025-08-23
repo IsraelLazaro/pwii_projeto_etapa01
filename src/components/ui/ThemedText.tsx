@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 export type ThemedTextProps = React.HTMLAttributes<HTMLParagraphElement> & {
   type?: "default" | "title" | "defaultSemiBold" | "subtitle" | "link";
-  as?: "p" | "span" | "h1" | "h2" | "h3" | "div"; // permite trocar o elemento HTML
+  as?: "p" | "span" | "h1" | "h2" | "h3" | "div"; 
 };
 
 export const ThemedText: React.FC<ThemedTextProps> = ({

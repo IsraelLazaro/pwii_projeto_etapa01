@@ -4,7 +4,6 @@ import { ThemedButton } from '../../components/ThemedButton';
 import { ThemedText } from '../../components/ThemedText';
 import { ThemedView } from '../../components/ThemedView';
 import { useNavigate } from 'react-router-dom';
-import { mockGetUser, mockGetPets, type Pet } from '../../services/auth';
 import { LongLogo } from '../../components/LongLogo';
 import './Profile.css';
 import { useThemeColor } from '../../hooks/useThemeColor';
@@ -12,26 +11,63 @@ import { PetCard } from '../../components/PetCard';
 import { api } from "../../../api";
 import { useAuth } from '../../hooks/useAuth';
 
+interface Pet {
+  _id: string;
+  name: string;
+  age: number;
+  specie: string; 
+  breed: string;
+  sex: string;
+  weight?: number;
+  size?: number;
+  photos?: string[];
+}
 export default function Profile() {
     const primaryColor = useThemeColor({}, 'primary');
-    const navigate = useNavigate();
-    
+    const navigate = useNavigate();    
     const secondTextColor = useThemeColor({}, 'placeholder');
-    const [user, setUser] = useState<any>(null);
+    const { user, token } = useAuth();
     const [pets, setPets] = useState<Pet[]>([]);
+    const [loading, setLoading] = useState(true);
     
 
     useEffect(() => {
-        async function fetchUserAndPets() {
-            const userData = await mockGetUser();
-            setUser(userData);
-            const petsData = await mockGetPets();
-            const userPets = petsData.filter(pet => userData.pets.includes(pet._id));
-            setPets(userPets);
-        }
-        fetchUserAndPets();
-    }, []);
+        const fetchUserPets = async () => {
+            try {
+                setLoading(true);
+                const response = await api.get('/pets', {
+                    headers: { 
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
 
+                setPets(response.data || []);
+                
+            } catch (error) {
+                console.error("Erro ao buscar pets:", error);
+                setPets([]); 
+            } finally {
+                setLoading(false);
+            }
+        };
+        
+        if (token) {
+            fetchUserPets();
+        }
+    }, [token]);
+    const handleDelete = async (petId: string) => {
+        try {
+        await api.delete(`/pets/${petId}`, {
+            headers: {
+            Authorization: `Bearer ${token}`
+            }
+        });
+        setPets((prev) => prev.filter((p) => p._id !== petId));
+        } catch (error) {
+        console.error("Erro ao deletar pet:", error);
+        }
+    };
     if (!user) return <div>Carregando...</div>;
 
     return (
@@ -39,13 +75,12 @@ export default function Profile() {
             <ThemedView variant="container" style={styles.container}>
                 <div style={{ textAlign: 'left', width: '100%' }}>
                     <LongLogo type="profile"></LongLogo>
-                    <div onClick={() => navigate('/Welcom_2')} className='click-img-profile'>
-                        <UserHeader username={user.username} avatarUrl={user.avatarUrl} />
+                    <div  className='click-img-profile'>
+                        <UserHeader userName={user.userName} avatarUrl={user.avatarUrl || '/assets/images/default_user.svg'}/>
                     </div>
 
                     <div className="profile-info">
                         <ThemedText type='small' style={{ color: secondTextColor, paddingTop: 10 }}>{user.email}</ThemedText>
-                        <ThemedText type="small" style={{ fontSize: 14 }}>{user.bio}</ThemedText>
                     </div>
                 </div>
 
@@ -53,7 +88,9 @@ export default function Profile() {
                     <ThemedView variant='section' style={styles.loadPet}>
                         <ThemedText type='subtitle' style={{ color: primaryColor }}>Meus Pets</ThemedText>
                         {pets.length === 0 ? (
-                            <ThemedText type="small" style={{ textAlign: 'center' }}>Nenhum pet cadastrado</ThemedText>
+                            <div style={{ width: '100%', textAlign: 'center', marginTop: '16px' }}>
+                                <ThemedText type="small">Nenhum pet cadastrado</ThemedText>
+                            </div>
                         ) : (
                             pets.map((pet) => (
                                 <div key={pet._id} style={{ marginBottom: 16, borderBottom: '1px solid #eee', paddingBottom: 12 }} className='pets'>
@@ -62,8 +99,13 @@ export default function Profile() {
                                             key={pet._id}
                                             name={pet.name}
                                             breed={pet.breed}
-                                            imageUrl={pet.photos?.[0] || '/assets/images/logo-pet.png'}
-                                            onEdit={() => console.log('Editar pet:', pet._id)}
+                                            imageUrl={pet.photos?.[0] ? `${api.getUri()}/uploads/${pet.photos[0]}` : '/assets/images/logo-pet.png'}
+                                            onEdit={() => navigate(`/PetForms/${pet._id}`)}
+                                            onDelete={() => {
+                                                if (window.confirm("Tem certeza que deseja excluir este pet?")) {
+                                                    handleDelete(pet._id);
+                                                }
+                                                }}
                                         />
                                     </ThemedView>
                                 </div>
@@ -73,7 +115,11 @@ export default function Profile() {
                 </div>
 
                 <div style={styles.button}>
-                    <ThemedButton type="success">Novo Pet</ThemedButton>
+                    <ThemedButton type="success"
+                        onClick={() => {
+                        navigate('/PetForms');
+                        }}
+                    >Novo Pet</ThemedButton>
                       <ThemedButton 
                         type="danger" 
                         onClick={() => {

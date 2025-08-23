@@ -2,7 +2,6 @@ import { useState, useRef, useEffect} from 'react';
 import './Register.css';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-//import { mockRegister } from '../../services/auth';
 import * as yup from 'yup';;
 import { useThemeColor } from '../../hooks/useThemeColor';
 import { useNavigate } from 'react-router-dom';
@@ -161,10 +160,8 @@ return (
       
       <div style={styles.signup}>
         <ThemedText>Já possui uma conta?</ThemedText>
-        <ThemedText
-          style={{ color: primaryColor, marginLeft: 8, cursor: 'pointer' }}
-          onClick={() => navigate('/Login')}
-        >
+        <ThemedText style={{ color: primaryColor, marginLeft: 8, cursor: 'pointer' }}
+          onClick={() => navigate('/Login')} >
           Login!!
         </ThemedText>
       </div>
@@ -208,6 +205,5 @@ const styles: { [key: string]: React.CSSProperties } = {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
-  },
-  
+  },  
 };

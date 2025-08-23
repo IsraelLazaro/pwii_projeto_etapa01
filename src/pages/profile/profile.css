@@ -30,9 +30,11 @@
   padding-right: 8px;
   align-items: center; 
 }
+
 .profile-pets img{
   cursor: pointer;
 }
+
 .profile-pets img:hover{
     transform: scale(1.05);
   box-shadow: 
@@ -40,9 +42,11 @@
     inset 0 0 0 3px #642efa98; 
   border: 3px solid #ffffff;
 }
+
 .profile-pets::-webkit-scrollbar {
   width: 6px;
 }
+
 .profile-pets::-webkit-scrollbar-thumb {
   background: #fdf6f6;
   border-radius: 3px;
@@ -70,7 +74,4 @@
   border-radius: 8px;
   background: #ffffff;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-.click-img-profile img{
-  cursor: pointer;
 }

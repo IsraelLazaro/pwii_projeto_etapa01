@@ -40,7 +40,12 @@ export default function Login() {
 
   const onSubmit = async (data: any) => {
     try {
-      await login(data.email, data.password); 
+      const response = await api.post('/login', {
+        email: data.email,
+        password: data.password
+      });
+      const { user, token } = response.data;
+      login(user, token);
       navigate("/Profile"); 
     } catch (error: any) {
       setModalText(error.response?.data || "Erro ao fazer login");
