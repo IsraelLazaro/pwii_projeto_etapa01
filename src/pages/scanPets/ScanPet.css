@@ -11,11 +11,11 @@
 }
 
 .dislike-button {
-  background-color: #e74c3c; /* vermelho */
+  background-color: #e74c3c; 
 }
 
 .like-button {
-  background-color: #2ecc71; /* verde */
+  background-color: #2ecc71; 
 }
 
 .dislike-button:hover {

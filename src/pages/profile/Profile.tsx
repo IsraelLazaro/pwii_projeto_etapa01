@@ -28,10 +28,8 @@ export default function Profile() {
     const secondTextColor = useThemeColor({}, 'placeholder');
     const { user, token } = useAuth();
     const [pets, setPets] = useState<Pet[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);   
     
-    
-
     useEffect(() => {
         const fetchUserPets = async () => {
             try {
@@ -72,7 +70,6 @@ export default function Profile() {
     if (loading) return <div>Carregando...</div>;   
     if (!user) return <div>Usuário não logado</div>; 
 
-
     return (
         <div className='safe-area'>
             <ThemedView variant="container" style={styles.container}>
@@ -92,11 +89,7 @@ export default function Profile() {
                             })
                         } 
                         />
-
-
-
                     </div>
-
                     <div className="profile-info">
                         <ThemedText type='small' style={{ color: secondTextColor, paddingTop: 10 }}>{user.email}</ThemedText>
                     </div>

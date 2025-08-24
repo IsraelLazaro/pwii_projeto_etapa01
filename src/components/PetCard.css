@@ -1,7 +1,6 @@
 .pet-card {
   position: relative;
-  display: flex;
-  
+  display: flex;  
   border-radius: 12px;
   overflow: hidden;
   background-color: white;
@@ -34,7 +33,7 @@
 .pet-edit-button {
   position: absolute;
   top: 8px;
-  right: 48px; /* modificado para abrir espaço p/ delete */
+  right: 48px;
   padding: 4px 8px;
   background: rgba(101, 46, 250, 0.9);
   border: 1px solid #ddd;
@@ -54,7 +53,6 @@
   position: absolute;
   top: 8px;
   right: 8px;
-
 }
 
 .pet-delete-button {

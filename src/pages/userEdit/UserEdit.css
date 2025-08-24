@@ -92,6 +92,7 @@ button[type="submit"] {
 button[type="submit"]:hover {
   background: #5124c8;
 }
+
 .btn-edit{
   display: flex;
   flex-direction: row;

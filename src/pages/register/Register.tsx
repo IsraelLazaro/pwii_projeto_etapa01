@@ -82,11 +82,9 @@ export default function Register() {
           },
         },
       };
-
       const response = await api.post("/user", payload);
 
       if (response.status === 201) {
-        // Tentativa de login automático
         let loginResponse;
         try {
           loginResponse = await api.post("/auth/login", {
@@ -94,7 +92,6 @@ export default function Register() {
             password: data.password,
           });
         } catch {
-          // fallback se o backend usar /login
           loginResponse = await api.post("/login", {
             email: data.email,
             password: data.password,
@@ -103,13 +100,9 @@ export default function Register() {
 
         const { token, user } = loginResponse.data || {};
         if (token && user) {
-          // Atualiza contexto de auth (e, se o contexto fizer, também localStorage)
           login(user, token);
-
           setModalText('Cadastro realizado com sucesso!');
           modalRef.current?.setVisible();
-
-          // Redireciona já autenticado
           setTimeout(() => navigate('/Profile'), 900);
         } else {
           throw new Error("Login automático não retornou token/usuário");
@@ -214,7 +207,6 @@ export default function Register() {
         ref={modalRef}
         text={modalText}
         onClose={() => {
-          // Mantém navegação de segurança se o modal for fechado antes do setTimeout
           if (modalText.includes('sucesso')) {
             navigate('/ScanPet');
           }

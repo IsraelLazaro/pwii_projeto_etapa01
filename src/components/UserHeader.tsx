@@ -7,7 +7,7 @@ type UserHeaderProps = {
   avatarUrl?: string;
   showEditIcon?: boolean;  
   onEditClick?: () => void;
-  onClick?: () => void; // ← Adicione esta linha
+  onClick?: () => void; 
 };
 
 export const UserHeader: React.FC<UserHeaderProps> = ({ 
@@ -15,13 +15,13 @@ export const UserHeader: React.FC<UserHeaderProps> = ({
   avatarUrl, 
   showEditIcon = true, 
   onEditClick,
-  onClick // ← Adicione esta linha
+  onClick 
 }) => {
   return (
     <div 
       className="user-header" 
-      onClick={onClick} // ← Adicione onClick aqui
-      style={{ cursor: onClick ? 'pointer' : 'default' }} // ← Opcional: muda cursor
+      onClick={onClick}
+      style={{ cursor: onClick ? 'pointer' : 'default' }} 
     >
       <div className="avatar-wrapper">
         <img src={avatarUrl} alt={userName} />

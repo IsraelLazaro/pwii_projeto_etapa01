@@ -6,11 +6,13 @@
   box-sizing: border-box;
   overflow-y: auto; 
 }
+
 .register-container {
   max-width: 420px;
   margin: 50px auto;
   overflow: visible;
 }
+
 .imgFundo {
   position: fixed;   
   top: 60%;             
@@ -36,7 +38,6 @@
   opacity: 0.6;
   cursor: not-allowed;
 }
-
 
 select.themed-text-input {
   appearance: none;

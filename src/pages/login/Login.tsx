@@ -4,7 +4,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useThemeColor } from '../../hooks/useThemeColor';
 import { useNavigate } from 'react-router-dom';
-//import { mockLogin } from '../../services/auth'; 
 import { LongLogo } from '../../components/LongLogo';
 import { ThemedView } from '../../components/ThemedView';
 import { ThemedText } from '../../components/ThemedText';

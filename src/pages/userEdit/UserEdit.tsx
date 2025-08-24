@@ -58,7 +58,6 @@ const formatPhone = (value: string) => {
 };
 
 export default function UserEdit() {
-  const primaryColor = useThemeColor({}, 'primary');
   const secondTextColor = useThemeColor({}, 'placeholder');
   const navigate = useNavigate();
   const location = useLocation();
@@ -140,7 +139,6 @@ export default function UserEdit() {
             phone: formatPhone(user.phone || '')
           }));
 
-          // Carrega a foto de perfil se existir
           if (user.profilePicture) {
             setProfilePicture(user.profilePicture);
           }
@@ -224,14 +222,11 @@ export default function UserEdit() {
     setLoading(true);
     try {
       const token = localStorage.getItem('token');
-      
-      // Upload da imagem primeiro, se houver
+
       let uploadedPicture = null;
       if (fileToUpload) {
         uploadedPicture = await uploadImage(fileToUpload);
       }
-
-      // Prepara o payload para atualizar os dados do usuário
       const payload: any = {};
       if (data.name) payload.name = data.name;
       if (data.userName) payload.userName = data.userName;
@@ -255,7 +250,6 @@ export default function UserEdit() {
 
         setModalText("Dados atualizados com sucesso!");
         
-        // Limpa o preview se o upload foi bem sucedido
         if (fileToUpload) {
           setFilePreview(null);
           setFileToUpload(null);
@@ -281,8 +275,6 @@ export default function UserEdit() {
         />
         <ThemedText type='title' style={styles.title}>EDITAR PERFIL</ThemedText>
         <img src="/assets/images/fundo-pata.webp" alt="pata" className='imgFundo'/>
-
-        {/* Seção de upload de foto */}
         <div style={{ marginBottom: 20 }}>
           <label style={{ display: 'block', marginBottom: 8, fontWeight: 'bold' }}>📸 Foto de Perfil:</label>
           <input 
@@ -291,8 +283,6 @@ export default function UserEdit() {
             onChange={onPickFile}
             style={{ marginBottom: 10 }}
           />
-          
-          {/* Preview da nova imagem */}
           {filePreview && (
             <div style={{ position: 'relative', display: 'inline-block', marginRight: 10, marginBottom: 10 }}>
               <img
@@ -322,8 +312,7 @@ export default function UserEdit() {
               </button>
             </div>
           )}
-          
-          {/* Foto atual do perfil */}
+
           {profilePicture && !filePreview && (
             <div style={{ position: 'relative', display: 'inline-block' }}>
               <img

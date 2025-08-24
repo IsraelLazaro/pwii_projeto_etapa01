@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { api } from "../../../api";
 import { ThemedView } from "../../components/ThemedView";
 import { ThemedText } from "../../components/ThemedText";
-import { useThemeColor } from "../../hooks/useThemeColor";
 import { UserHeader } from "../../components/UserHeader";
 import { LongLogo } from "../../components/LongLogo";
 import { FiX, FiHeart } from "react-icons/fi";
@@ -13,19 +12,17 @@ import { useAuth } from "../../hooks/useAuth";
 import { motion, AnimatePresence } from "framer-motion";
 import "./ScanPet.css";
 
-
 export default function ScanPet() {
   const [pets, setPets] = useState<Pet[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState<"left" | "right" | null>(null);
   const { user } = useAuth();
   const navigate = useNavigate();
-  const secondTextColor = useThemeColor({}, 'placeholder');
 
   useEffect(() => {
     async function fetchPets() {
       try {
-        const data = await getCityPets(); // token já vai pelo interceptor
+        const data = await getCityPets();
         setPets(data);
       } catch (err) {
         console.error("❌ Erro ao carregar pets:", err);
@@ -36,19 +33,17 @@ export default function ScanPet() {
 
   const currentPet = pets[currentIndex];
 
-  // Handler com animação
   const handleSwipe = (dir: "left" | "right") => {
     setDirection(dir);
     setTimeout(() => {
       setCurrentIndex((prev) => prev + 1);
       setDirection(null);
-    }, 300); // espera animação acabar
+    }, 300); 
   };
 
   return (
     <div className="safe-area">
       <ThemedView variant="container" style={styles.container}>
-        {/* Header com logo e usuário */}
           <div style={{ textAlign: 'left', width: '100%' }}>
             <LongLogo type="profile" />
              <div  className='click-img-profile'>
@@ -65,7 +60,6 @@ export default function ScanPet() {
 
             </div>
           </div>
-        {/* Card animado do pet */}
         <AnimatePresence mode="popLayout">
           {currentPet ? (
             <motion.div
@@ -117,8 +111,6 @@ export default function ScanPet() {
             <ThemedText type="title">Nenhum pet encontrado 😢</ThemedText>
           )}
         </AnimatePresence>
-
-        {/* Botões Like / Dislike */}
         {currentPet && (
           <div style={styles.actions}>
             <button
