@@ -4,14 +4,15 @@ interface User {
   id: string;
   userName: string;
   email: string;
-  avatarUrl?: string;
+  profilePicture?: string; 
+  role: string; 
   pets: string[];
-
 }
 
 interface AuthContextType {
   user: User | null;
   token: string | null;
+  loading: boolean;   // 👈 agora o Profile pode usar
   login: (user: User, token: string) => void;
   logout: () => void;
 }
@@ -19,6 +20,7 @@ interface AuthContextType {
 export const AuthContext = createContext<AuthContextType>({
   user: null,
   token: null,
+  loading: true,
   login: () => {},
   logout: () => {},
 });
@@ -26,19 +28,21 @@ export const AuthContext = createContext<AuthContextType>({
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     const storedToken = localStorage.getItem("token");
-    console.log("Recuperando do localStorage:", { storedUser, storedToken }); 
+
     if (storedUser && storedToken) {
       setUser(JSON.parse(storedUser));
       setToken(storedToken);
     }
+
+    setLoading(false);
   }, []);
 
   const login = (userData: User, token: string) => {
-    console.log("Salvando no contexto:", { userData, token });
     setUser(userData);
     setToken(token);
     localStorage.setItem("user", JSON.stringify(userData));
@@ -53,7 +57,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout }}>
+    <AuthContext.Provider value={{ user, token, loading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

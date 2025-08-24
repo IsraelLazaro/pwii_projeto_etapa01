@@ -30,6 +30,7 @@ export default function Profile() {
     const [pets, setPets] = useState<Pet[]>([]);
     const [loading, setLoading] = useState(true);
     
+    
 
     useEffect(() => {
         const fetchUserPets = async () => {
@@ -68,15 +69,32 @@ export default function Profile() {
         console.error("Erro ao deletar pet:", error);
         }
     };
-    if (!user) return <div>Carregando...</div>;
+    if (loading) return <div>Carregando...</div>;   
+    if (!user) return <div>Usuário não logado</div>; 
+
 
     return (
         <div className='safe-area'>
             <ThemedView variant="container" style={styles.container}>
                 <div style={{ textAlign: 'left', width: '100%' }}>
-                    <LongLogo type="profile"></LongLogo>
+                    <LongLogo type="profile" onClick={() => navigate('/ScanPet')}></LongLogo>
                     <div  className='click-img-profile'>
-                        <UserHeader userName={user.userName} avatarUrl={user.avatarUrl || '/assets/images/default_user.svg'}/>
+                        <UserHeader 
+                        userName={user.userName} 
+                        avatarUrl={
+                            user.profilePicture
+                            ? `${api.getUri()}/uploads/${user.profilePicture}`
+                            : '/assets/images/default_user.svg'
+                        }
+                        onEditClick={() =>
+                            navigate("/Profile/UserEdit", {
+                            state: { userId: user.id }   
+                            })
+                        } 
+                        />
+
+
+
                     </div>
 
                     <div className="profile-info">

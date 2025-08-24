@@ -9,6 +9,8 @@ import FAQPage from './pages/FAQ';
 import { AuthProvider } from './context/AuthProvider';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import PetForms from './pages/petForms/PetForm';
+import ScanPet from './pages/scanPets/ScanPets';
+import UserEdit from './pages/userEdit/UserEdit';
 
 const App: React.FC = () => {
   return (
@@ -25,6 +27,17 @@ const App: React.FC = () => {
               <Profile/>
             </ProtectedRoute>
           }/>   
+          <Route path="/Profile/UserEdit" element={
+            <ProtectedRoute>
+              <UserEdit/>
+            </ProtectedRoute>
+          }/> 
+          <Route path="/ScanPet" element={
+              <ProtectedRoute>
+                <ScanPet />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/PetForms" element={
               <ProtectedRoute>
                 <PetForms />

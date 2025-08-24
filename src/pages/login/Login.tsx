@@ -46,7 +46,7 @@ export default function Login() {
       });
       const { user, token } = response.data;
       login(user, token);
-      navigate("/Profile"); 
+      navigate("/ScanPet"); 
     } catch (error: any) {
       setModalText(error.response?.data || "Erro ao fazer login");
       modalRef.current?.setVisible();
