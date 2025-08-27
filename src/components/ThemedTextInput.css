@@ -2,15 +2,32 @@
   display: flex;
   flex-direction: column;
   font-weight: bold;
-  width: 100%
+  width: 100%;
 }
 
 .themed-text-input {
-  padding: 10px;
+  padding: 12px;
   border: 1px solid #aaa;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 1rem;
-  min-width: 100%;
+  width: 100%;
   box-sizing: border-box;
-  font-weight: bold;
+  font-weight: normal;
+  background-color: white;
+  color: black;
+  transition: border-color 0.3s ease;
+}
+
+.themed-text-input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.themed-text-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.themed-text-input::placeholder {
+  color: #888;
 }

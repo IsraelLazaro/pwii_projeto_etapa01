@@ -1,5 +1,5 @@
 import React from 'react';
-import InfoCard from './InfoCard';
+import { InfoCard } from './InfoCard';
 import './InfoSection.css';
 
 type InfoSectionProps = {
@@ -12,10 +12,10 @@ type InfoSectionProps = {
 const InfoSection: React.FC<InfoSectionProps> = ({ gender, breed, age, weight }) => {
   return (
     <div className="info-section">
-      <InfoCard label="Sexo" value={gender} />
-      <InfoCard label="Raça" value={breed} />
-      <InfoCard label="Idade" value={age} />
-      <InfoCard label="Peso" value={weight} />
+      <InfoCard title="Sexo" description={gender} />
+      <InfoCard title="Raça" description={breed} />
+      <InfoCard title="Idade" description={age} />
+      <InfoCard title="Peso" description={weight} />
     </div>
   );
 };

@@ -11,6 +11,7 @@ type ThemedTextInputProps = {
   secureTextEntry?: boolean;
   onChangeText?: (value: string) => void;
   style?: React.CSSProperties;
+  type?: React.HTMLInputTypeAttribute;
 };
 
 export const ThemedTextInput: React.FC<ThemedTextInputProps> = ({
@@ -21,13 +22,18 @@ export const ThemedTextInput: React.FC<ThemedTextInputProps> = ({
   errorMessage,
   secureTextEntry,
   style,
+  type = 'text', 
 }) => {
   return (
     <div className="themed-input-wrapper" style={style}>
-      {label && <ThemedText type="body" style={{ marginBottom: 4 }}>{label}</ThemedText>}
+      {label && (
+        <ThemedText type="body" style={{ marginBottom: 4 }}>
+          {label}
+        </ThemedText>
+      )}
       <input
         className="themed-text-input"
-        type={secureTextEntry ? 'password' : 'text'}
+        type={secureTextEntry ? 'password' : type}
         value={value}
         placeholder={placeholder}
         onChange={(e) => onChangeText?.(e.target.value)}

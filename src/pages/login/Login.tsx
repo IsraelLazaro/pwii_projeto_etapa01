@@ -4,7 +4,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useThemeColor } from '../../hooks/useThemeColor';
 import { useNavigate } from 'react-router-dom';
-import { mockLogin } from '../../services/auth'; 
 import { LongLogo } from '../../components/LongLogo';
 import { ThemedView } from '../../components/ThemedView';
 import { ThemedText } from '../../components/ThemedText';
@@ -12,11 +11,9 @@ import { ThemedTextInput } from '../../components/ThemedTextInput';
 import { ThemedButton } from '../../components/ThemedButton';
 import { AlertModal, type AlertModalHandle } from '../../components/AlertModal';
 import './Login.css';
+import { api } from "../../../api";
+import { useAuth } from '../../hooks/useAuth';
 
-// quando for usar autenticação
-// import { useAuth } from '@/hooks/useAuth';
-
-// ✅ Validação com Yup
 const schema = yup.object({
   email: yup.string().required('O e-mail é obrigatório').email('E-mail inválido'),
   password: yup.string().required('A senha é obrigatória').min(6, 'A senha deve ter pelo menos 6 caracteres'),
@@ -25,10 +22,8 @@ const schema = yup.object({
 export default function Login() {
   const primaryColor = useThemeColor({}, 'primary');
   const secondTextColor = useThemeColor({}, 'placeholder');
+  const { login } = useAuth();
   const navigate = useNavigate();
-
-  // fazer login
-  // const { login } = useAuth();
 
   const { register, setValue, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
@@ -43,15 +38,16 @@ export default function Login() {
   }, [register]);
 
   const onSubmit = async (data: any) => {
-    // resposta login
-    // const response = await login(data.email, data.password);
-
-    const response = await mockLogin(data.email, data.password);
-
-    if (response.success) {
-      navigate('/Profile');
-    } else {
-      setModalText(response.message);
+    try {
+      const response = await api.post('/login', {
+        email: data.email,
+        password: data.password
+      });
+      const { user, token } = response.data;
+      login(user, token);
+      navigate("/ScanPet"); 
+    } catch (error: any) {
+      setModalText(error.response?.data || "Erro ao fazer login");
       modalRef.current?.setVisible();
     }
   };

@@ -1,11 +1,11 @@
 .pet-card {
   position: relative;
-  display: flex;
-  
+  display: flex;  
   border-radius: 12px;
   overflow: hidden;
   background-color: white;
 }
+
 .pet-card img {
   width: 100px;
   height: 100px;
@@ -13,21 +13,27 @@
   border: 1px solid #ddd;
   border-radius: 100%;
 }
+
 .pet-card-info {
   padding: 10px;
 }
-.pet-card-info h4 {
+
+.pet-card-info h4 {  
+  color: #3b1e90;
+  font: bolder;
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 2rem;
 }
+
 .pet-card-info p {
   margin: 4px 0 0;
   color: #666;
 }
+
 .pet-edit-button {
   position: absolute;
   top: 8px;
-  right: 8px;
+  right: 48px;
   padding: 4px 8px;
   background: rgba(101, 46, 250, 0.9);
   border: 1px solid #ddd;
@@ -39,4 +45,27 @@
 .pet-edit-button:hover {
   border: 2px solid #ddd;
   background: #3b1e90;
+}
+
+.pet-card-actions {
+  display: flex;
+  gap: 16px;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.pet-delete-button {
+  padding: 4px 8px;
+  background: rgba(229, 57, 53, 0.9);
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+.pet-delete-button:hover {
+  border: 2px solid #ddd;
+  background: #b71c1c;
 }
