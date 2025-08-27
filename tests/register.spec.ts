@@ -30,8 +30,8 @@ test.describe('Página de cadastro', () => {
         await page.selectOption('#uf', 'PB');
         await page.selectOption('#cidade', 'Bom Jesus');
 
-        await page.fill('input[placeholder="Digite seu nome"]', 'Teste');
-        await page.fill('input[placeholder="Digite seu e-mail"]', 'teste@gmail.com');
+        await page.fill('input[placeholder="Digite seu nome"]', 'Teste de Cadastro');
+        await page.fill('input[placeholder="Digite seu e-mail"]', 'teste_cadastro@gmail.com');
         await page.fill('input[placeholder="Digite sua senha"]', '123456');
         await page.fill('input[placeholder="Digite a senha novamente"]', '123456');
 
@@ -53,7 +53,7 @@ test.describe('CRUD de pet', () => {
         await page.selectOption('#cidade', 'Juazeiro do Norte');
 
         await page.fill('input[placeholder="Digite seu nome"]', 'Teste Pet');
-        await page.fill('input[placeholder="Digite seu e-mail"]', 'testepet@gmail.com');
+        await page.fill('input[placeholder="Digite seu e-mail"]', 'teste_pet@gmail.com');
         await page.fill('input[placeholder="Digite sua senha"]', '123456');
         await page.fill('input[placeholder="Digite a senha novamente"]', '123456');
 
@@ -86,48 +86,56 @@ test.describe('CRUD de pet', () => {
         expect(page.getByText('Cachorro de teste')).toBeVisible();
     });
 
-    // test('Deve excluir o pet criado', async ({ page }) => {
+    test('Deve excluir o pet criado', async ({ page }) => {
 
-    //     await page.goto('http://localhost:5173/Register');
+        await page.goto('http://localhost:5173/Register');
 
-    //     await page.selectOption('#uf', 'CE');
-    //     await page.selectOption('#cidade', 'Juazeiro do Norte');
+        await page.selectOption('#uf', 'CE');
+        await page.selectOption('#cidade', 'Juazeiro do Norte');
 
-    //     await page.fill('input[placeholder="Digite seu nome"]', 'Teste Excluir Pet');
-    //     await page.fill('input[placeholder="Digite seu e-mail"]', 'testeexcluirpet@gmail.com');
-    //     await page.fill('input[placeholder="Digite sua senha"]', '123456');
-    //     await page.fill('input[placeholder="Digite a senha novamente"]', '123456');
+        await page.fill('input[placeholder="Digite seu nome"]', 'Teste Excluir Pet');
+        await page.fill('input[placeholder="Digite seu e-mail"]', 'teste_excluir_pet@gmail.com');
+        await page.fill('input[placeholder="Digite sua senha"]', '123456');
+        await page.fill('input[placeholder="Digite a senha novamente"]', '123456');
 
-    //     const btnCadastrar = page.getByRole('button', { name: 'Cadastrar' });
-    //     await expect(btnCadastrar).toBeVisible();
-    //     btnCadastrar.click();
+        const btnCadastrar = page.getByRole('button', { name: 'Cadastrar' });
+        await expect(btnCadastrar).toBeVisible();
+        btnCadastrar.click();
 
-    //     await expect(page).toHaveURL('http://localhost:5173/Profile');
+        await expect(page).toHaveURL('http://localhost:5173/Profile');
 
-    //     const btnNovoPet = page.getByRole('button', { name: 'Novo Pet' });
-    //     await expect(btnNovoPet).toBeVisible();
-    //     btnNovoPet.click();
+        const btnNovoPet = page.getByRole('button', { name: 'Novo Pet' });
+        await expect(btnNovoPet).toBeVisible();
+        btnNovoPet.click();
 
-    //     await expect(page).toHaveURL('http://localhost:5173/PetForms');
+        await expect(page).toHaveURL('http://localhost:5173/PetForms');
 
-    //     await page.fill('input[placeholder="Digite o nome do pet"]', 'Cachorro');
-    //     await page.fill('input[placeholder="Digite a raça"]', 'Vira-lata caramelo');
-    //     await page.fill('input[placeholder="Digite a idade"]', '5');
-    //     await page.fill('input[placeholder="Digite o peso (kg)"]', '10');
-    //     await page.fill('input[placeholder="Ex: Cachorro, Gato"]', 'Cachorro');
+        await page.fill('input[placeholder="Digite o nome do pet"]', 'Cachorro');
+        await page.fill('input[placeholder="Digite a raça"]', 'Vira-lata caramelo');
+        await page.fill('input[placeholder="Digite a idade"]', '5');
+        await page.fill('input[placeholder="Digite o peso (kg)"]', '10');
+        await page.fill('input[placeholder="Ex: Cachorro, Gato"]', 'Cachorro');
 
-    //     await page.selectOption('#sexo', 'Macho');
+        await page.selectOption('#sexo', 'Macho');
 
-    //     const btnCadastrarPet = page.getByRole('button', { name: 'Cadastrar' });
-    //     await expect(btnCadastrarPet).toBeVisible();
-    //     btnCadastrarPet.click();
+        const btnCadastrarPet = page.getByRole('button', { name: 'Cadastrar' });
+        await expect(btnCadastrarPet).toBeVisible();
+        btnCadastrarPet.click();
 
-    //     await expect(page).toHaveURL('http://localhost:5173/Profile');
+        await expect(page).toHaveURL('http://localhost:5173/Profile');
 
-    //     expect(page.getByText('Cachorro')).toBeVisible();
+        expect(page.getByText('Cachorro')).toBeVisible();
 
-    //     const btnExcluirPet = page.getByRole('button', { name: 'pet-delete-button' });
-    //     await expect(btnExcluirPet).toBeVisible();
-    //     btnExcluirPet.click();
-    // });
+        page.on('dialog', async dialog => {
+
+            expect(dialog.message()).toBe('Tem certeza que deseja excluir este pet?');
+            await dialog.accept();
+        });
+
+        const btnExcluirPet = page.locator('.pet-delete-button');
+        await expect(btnExcluirPet).toBeVisible();
+        btnExcluirPet.click();
+
+        await expect(page.getByText('Cachorro')).not.toBeVisible();        
+    });
 });
