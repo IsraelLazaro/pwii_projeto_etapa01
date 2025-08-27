@@ -52,9 +52,9 @@ const formatCPF = (value: string) => {
 const formatPhone = (value: string) => {
   return (value || '')
     .replace(/\D/g, '')
-    .slice(0, 10)
+    .slice(0, 11)
     .replace(/(\d{2})(\d)/, '($1) $2')
-    .replace(/(\d{4})(\d)/, '$1-$2');
+    .replace(/(\d{5})(\d)/, '$1-$2');
 };
 
 export default function UserEdit() {
@@ -232,8 +232,10 @@ export default function UserEdit() {
       if (data.userName) payload.userName = data.userName;
       if (data.email) payload.email = data.email;
       if (data.password) payload.password = data.password;
-      if (data.cpf) payload.cpf = data.cpf.replace(/\D/g, '');
-      if (data.phone) payload.phone = data.phone.replace(/\D/g, '');
+      // if (data.cpf) payload.cpf = data.cpf.replace(/\D/g, '');
+      // if (data.phone) payload.phone = data.phone.replace(/\D/g, '');
+      if (data.cpf) payload.cpf = data.cpf;
+      if (data.phone) payload.phone = data.phone;
 
       const response = await api.put(`/user`, payload, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},

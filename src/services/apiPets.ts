@@ -9,7 +9,7 @@ export interface Pet {
   age: number;
   specie: string;
   sex: Sex;
-  photos?: string[];          // ← opcional
+  photos?: string[];         
   description?: string;
   vaccines?: string[];
   weight?: number;
