@@ -26,6 +26,7 @@ export const CityStateInputs: React.FC<CityStateInputsProps> = ({
       <div className="input-column state-column">
         <ThemedText type="body" style={{ marginBottom: 4 }}>Estado:</ThemedText>
         <select
+          id='uf'
           className="themed-text-input"
           value={selectedState}
           onChange={(e) => onStateChange(e.target.value)}
@@ -44,6 +45,7 @@ export const CityStateInputs: React.FC<CityStateInputsProps> = ({
       <div className="input-column city-column">
         <ThemedText type="body" style={{ marginBottom: 4 }}>Cidade:</ThemedText>
         <select
+          id='cidade'
           className="themed-text-input"
           onChange={(e) => onCityChange(e.target.value)}
           disabled={!selectedState}

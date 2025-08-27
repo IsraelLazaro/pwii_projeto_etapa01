@@ -316,6 +316,7 @@ export default function PetForms() {
           />
           <label style={{ marginBottom: 5, fontWeight: 'bold' }}>Sexo:</label>
           <select
+            id='sexo'
             value={watch("sex")}
             onChange={(e) => setValue("sex", e.target.value as Sex)}
             style={{
